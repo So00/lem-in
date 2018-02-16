@@ -6,11 +6,13 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/16 10:51:06 by atourner         ###   ########.fr       */
+/*   Updated: 2018/02/16 14:06:37 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_H
 # define LEM_H
+
+char		**ft_get_anthill();
 
 #endif

@@ -5,22 +5,23 @@
 #                                                     +:+ +:+         +:+      #
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/01/21 01:31:15 by atourner          #+#    #+#              #
-#    Updated: 2018/02/16 10:57:15 by atourner         ###   ########.fr        #
+#    Created: 2018/02/16 18:00:36 by atourner          #+#    #+#              #
+#    Updated: 2018/02/16 18:00:39 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_LEM = lem-in
 
-FLAGS = -Wall -Werror -Wextra
-
 LIB = ft_printf/libftprintf.a
 
 INCLUDES_LIB = ft_printf/includes
 
+FLAGS = -Wall -Werror -Wextra
+
 INCLUDES_LEM = ft_lem-in/includes
 
-SRC_LEM = ft_lem-in/lem-in.c
+SRC_LEM = ft_lem-in/lem-in.c\
+		  ft_lem-in/ft_get_anthill.c
 
 COMP_LEM = $(SRC_LEM:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 22:31:41 by atourner          #+#    #+#             */
-/*   Updated: 2018/01/20 22:32:41 by atourner         ###   ########.fr       */
+/*   Updated: 2018/02/16 13:58:20 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ft_free_ar(void **mem)
 	i = -1;
 	str = (char**)mem;
 	while (str[++i])
-		free(str[i]);
+		ft_strdel(&str[i]);
 	free(str);
 	str = NULL;
 }

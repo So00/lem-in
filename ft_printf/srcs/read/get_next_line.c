@@ -6,11 +6,14 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:16:47 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/12 14:57:13 by atourner         ###   ########.fr       */
+/*   Updated: 2018/02/16 18:02:34 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdlib.h>
 #include "get_next_line.h"
+#include <stdio.h>
 
 static char		*ft_cpy_realloc(char *buff, int len, char *file_read)
 {
@@ -35,13 +38,14 @@ static char		*ft_cpy_realloc(char *buff, int len, char *file_read)
 
 static void		cpy_save(t_sav_str *act, char **file_read)
 {
-	ft_strcpy(*file_read, act->buff);
-	free(act->buff);
+	if (act->len)
+		ft_strcpy(*file_read, act->buff);
+	ft_strdel(&act->buff);
 	act->buff = NULL;
 	act->len = 0;
 }
 
-static char		*ft_cpy_malloc(char *str, char c, int fre)
+char			*ft_cpy_malloc(char *str, char c, int fre)
 {
 	char	*new;
 	int		i;
@@ -53,15 +57,15 @@ static char		*ft_cpy_malloc(char *str, char c, int fre)
 		new[i] = str[i];
 	new[i] = '\0';
 	if (fre)
-		free(str);
+		ft_strdel(&str);
 	return (new);
 }
 
-static int		exit_gnl(char **to_free, char **line)
+int				for_free(char **str)
 {
-	free(*to_free);
-	*line = NULL;
-	return (0);
+	ft_strdel(str);
+	*str = NULL;
+	return (1);
 }
 
 int				get_next_line(const int fd, char **line)
@@ -73,16 +77,19 @@ int				get_next_line(const int fd, char **line)
 
 	if (fd < 0 || !line || fd > 4864 || !(file_read = ft_strnew(BUFF_SIZE + 1)))
 		return (-1);
-	if (save[fd].len)
-		cpy_save(&save[fd], &file_read);
+	cpy_save(&save[fd], &file_read);
 	while (!ft_strchr(file_read, '\n') && (d = read(fd, buff, BUFF_SIZE)))
 		if (d < 0 || !(file_read = ft_cpy_realloc(buff, d, file_read)))
 			return (-1);
-	if (!file_read[0] && d == 0)
-		return (exit_gnl(&file_read, line));
+	if (!file_read[0] && d == 0 && for_free(&file_read))
+	{
+		*line = NULL;
+		ft_strdel(&save[fd].buff);
+		return (0);
+	}
 	if ((*line = ft_strchr(file_read, '\n')))
 	{
-		if (!(save[fd].buff = ft_cpy_malloc(&line[0][1], '\0', 0)))
+		if (!(save[fd].buff = ft_cpy_malloc(*line + 1, '\0', 0)))
 			return (-1);
 		save[fd].len = ft_strlen(save[fd].buff);
 	}
