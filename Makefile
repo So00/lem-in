@@ -6,7 +6,7 @@
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 18:00:36 by atourner          #+#    #+#              #
-#    Updated: 2018/02/16 18:00:39 by atourner         ###   ########.fr        #
+#    Updated: 2018/02/17 09:20:39 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,6 @@ clean :
 
 fclean : clean
 	@make fclean -C ft_printf
-	@rm -rf $(COMP_LEM)
+	@rm -rf $(NAME_LEM)
 
 re : fclean all

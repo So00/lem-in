@@ -6,12 +6,30 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:30:29 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/16 18:04:56 by atourner         ###   ########.fr       */
+/*   Updated: 2018/02/17 10:14:44 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 #include "ft_printf.h"
+
+static t_room	**add_one(t_room **old)
+{
+	t_room	*new;
+
+
+}
+
+static t_room	**parse(char **to_get)
+{
+	t_room		**room;
+	int			size;
+
+	size = 2;
+	if (!(room = (t_room**)malloc(sizeof(t_room*) * size)))
+		return (NULL);
+	
+}
 
 static char		**double_ar_realloc(char **old, char *tmp, int size)
 {

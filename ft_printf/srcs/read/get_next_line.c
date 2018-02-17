@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 12:16:47 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/16 18:02:34 by atourner         ###   ########.fr       */
+/*   Updated: 2018/02/17 09:10:54 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				get_next_line(const int fd, char **line)
 	char				*file_read;
 	int					d;
 	char				buff[BUFF_SIZE + 1];
-	static t_sav_str	save[4865];
+	static t_sav_str	save[100];
 
 	if (fd < 0 || !line || fd > 4864 || !(file_read = ft_strnew(BUFF_SIZE + 1)))
 		return (-1);
