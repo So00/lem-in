@@ -13,50 +13,56 @@
 #include "lem.h"
 #include "ft_printf.h"
 
-static t_room	**add_one(t_room **old)
+static int		get_ant_nb(char *to_get)
 {
-	t_room	*new;
-
-
+	if (to_get[0] == '#')
+		return (0);
+	if (to_get[i][0] == '-' && ft_strlen(to_get[i]) >= 11
+		&& ft_strcmp(to_get[i], "-2147483648\0") > 0)
+		return (-1);
+	if (ft_strlen(to_get[i] >= 10) && ft_strcmp(to_get[i], "2147483647\0") > 0)
+		return (-1);
+	return (ft_atoi(to_get[i]));
 }
 
-static t_room	**parse(char **to_get)
+int		valid_room(char *tmp)
 {
-	t_room		**room;
-	int			size;
+	if (!ft_strcmp(tmp, "##start"))
+}
 
-	size = 2;
-	if (!(room = (t_room**)malloc(sizeof(t_room*) * size)))
-		return (NULL);
+static	t_room	*parse(char *to_get)
+{
 	
 }
 
-static char		**double_ar_realloc(char **old, char *tmp, int size)
-{
-	char	**ret;
-	int		i;
-
-	i = -1;
-	if (!(ret = (char**)malloc(sizeof(char*) * size)))
-		return (NULL);
-	while (++i < size - 2)
-		ret[i] = ft_strdup(old[i]);
-	ret[i] = tmp;
-	ret[i + 1] = NULL;
-	if (old)
-		ft_free_ar((void**)old);
-	return (ret);
-}
-
-char			**ft_get_anthill()
+t_room			*ft_get_anthill()
 {
 	char	*tmp;
-	char	**ret;
-	int		size;
+	int		ant_nb;
+	t_room	*first;
+	t_room	*act;
 
-	ret = NULL;
-	size = 1;
-	while (get_next_line(0, &tmp) && ++size)
-		ret = double_ar_realloc(ret, tmp, size);
-	return (ret);
+	ant_nb = 0;
+	first = NULL;
+	while (get_next_line(0, &tmp) && !ant_nb)
+	{
+		ant_nb = get_ant_nb(tmp);
+		ft_strdel(&tmp);
+	}
+	while (ant_nb > 0 && get_next_line(0, tmp))
+	{
+			if (first)
+			{
+				act->next = parse(tmp, ant_nb);
+				act = act->next;
+			}
+			else
+			{
+				first = parse(tmp, ant_nb);
+				act = first;
+			}
+		}
+		ft_strdel(tmp);
+	}
+	return (first);
 }
