@@ -6,7 +6,7 @@
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 10:42:44 by atourner          #+#    #+#              #
-#    Updated: 2018/02/12 15:52:34 by atourner         ###   ########.fr        #
+#    Updated: 2018/02/26 16:08:15 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRC_NAME = \
 	lst/ft_lstmap.c\
 	math/ft_power.c\
 	str/ft_islower.c\
+	str/ft_iswhitespace.c\
 	str/ft_isupper.c\
 	str/ft_strlower.c\
 	str/ft_strupper.c\

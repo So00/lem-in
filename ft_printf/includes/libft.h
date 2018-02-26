@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 11:20:26 by atourner          #+#    #+#             */
-/*   Updated: 2018/01/20 22:30:46 by atourner         ###   ########.fr       */
+/*   Updated: 2018/02/26 16:04:27 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int				ft_atoi(const char *str);
 int				ft_isalpha(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
+int				ft_iswhitespace(char c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_tolower(int c);
