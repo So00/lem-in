@@ -1,26 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_ar.c                                       :+:      :+:    :+:   */
+/*   mem_struct_room.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/20 22:31:41 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/26 16:33:01 by atourner         ###   ########.fr       */
+/*   Created: 2018/02/27 13:56:56 by atourner          #+#    #+#             */
+/*   Updated: 2018/02/27 14:36:18 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lem.h"
 #include "ft_printf.h"
 
-void		ft_free_ar(void **mem)
+t_room		*create_room()
 {
-	char	**str;
-	int		i;
+	t_room		*new;
 
-	i = -1;
-	str = (char**)mem;
-	while (str[++i])
-		ft_strdel(&str[i]);
-	free(str);
-	str = NULL;
+	if (!(new = (t_room*)malloc(sizeof(t_room))))
+		return (NULL);
+	ft_bzero(new, sizeof(t_room));
+	new->next = NULL;
+	return (new);
+}
+
+void		free_room(t_room *act)
+{
+	ft_bzero(act, sizeof(t_room));
+	free(act);
+}
+
+void		free_all_room(t_room *first)
+{
+	t_room	*next;
+
+	next = first;
+	while (next)
+	{
+		next = first->next;
+		free_room(first);
+		first = next;
+	}
 }

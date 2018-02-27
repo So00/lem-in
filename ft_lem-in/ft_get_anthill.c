@@ -6,26 +6,38 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:30:29 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/26 16:32:19 by atourner         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:53:35 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 #include "ft_printf.h"
 
-static int		get_ant_nb(char *to_get)
+static int		get_ant_nb(char **to_get)
 {
-	if (to_get[0] == '#')
-		return (0);
-	if (to_get[i][0] == '-' && ft_strlen(to_get[i]) >= 11
-		&& ft_strcmp(to_get[i], "-2147483648\0") > 0)
-		return (-1);
-	if (ft_strlen(to_get[i] >= 10) && ft_strcmp(to_get[i], "2147483647\0") > 0)
-		return (-1);
-	return (ft_atoi(to_get[i]));
+	int		len;
+	int		ret;
+
+	len = (int)ft_strlen(*to_get);
+	ret = 1;
+	if (!strcmp(*to_get, "##start\0")
+			|| !strcmp(*to_get, "##end\0") || !*to_get)
+		ret = -1;
+	if (ret > 0 && (*to_get)[0] == '#')
+		ret = 0;
+	if (ret > 0 && len > 10)
+		ret = -1;
+	if (ret > 0 && !ft_isstrdigit(*to_get))
+		ret = -1;
+	if (ret > 0 && len == 10 && ft_strcmp(*to_get, "2147483647\0") > 0)
+		ret = -1;
+	if (ret > 0)
+		ret = ft_atoi(*to_get);
+	ft_strdel(to_get);
+	return (ret);
 }
 
-int		valid_room(char *tmp)
+/*int		valid_room(char *tmp)
 {
 	char	**separate_tmp;
 	int		len;
@@ -38,51 +50,50 @@ int		valid_room(char *tmp)
 		len++;
 	if (len < 3)
 		len = 0;
-	else if (ft_isstrdigit(separate_tmp[len - 1]) && ft_isstrdigit(separate_tmp[len - 2]))
+	else if (ft_isstrdigit(separate_tmp[len - 1])
+			&& ft_isstrdigit(separate_tmp[len - 2]))
 		len = 1;
 	else
 		len = 0;
-	ft_free_ar(separate_tmp);
+	ft_free_ar((void**)separate_tmp);
+	if (!len)
+		ft_strdel(&tmp);
 	return (len);
-}
+}*/
 
-static	t_room	*parse(char *to_get)
+static char		**realloc_ar(char **tmp, char **act, int nb)
 {
-	t_room	*new;
-	char	*tmp;
+	char		**new;
+	int			to_cpy;
 
-	if (!(new = (t_room*)malloc(sizeof(t_room))))
+	if (!(new = (char**)malloc(sizeof(char*) * (nb + 1))))
 		return (NULL);
-	ft_bzero(new, sizeof(t_room));
-	if (to_get == "##start")
-		t_room->start = 1;
-	if (to_get == "##end")
-		t_room->end = 1;
+	to_cpy = -1;
+	while (++to_cpy < nb - 1)
+		new[to_cpy] = ft_strdup(act[to_cpy]);
+	new[to_cpy] = ft_strdup(*tmp);
+	new[to_cpy + 1] = NULL;
+	if (act)
+		ft_free_ar((void**)act);
+	ft_strdel(tmp);
+	return (new);
 }
 
 t_room			*ft_get_anthill()
 {
 	char	*tmp;
 	int		ant_nb;
+	char	**act;
+	int		nb;
 	t_room	*first;
-	int		comment;
 
+	first = create_room();
 	ant_nb = 0;
-	first = NULL;
-	while (get_next_line(0, &tmp) && !ant_nb)
-	{
-		ant_nb = get_ant_nb(tmp);
-		ft_strdel(&tmp);
-	}
-	while (ant_nb > 0 && get_next_line(0, tmp))
-	{
-		if ((comment = valid_room(tmp)))
-				parse(first, tmp, ant_nb);
-		else
-			break ;
-			ft_strdel(tmp);
-	}
-	if (tmp)
-		ft_strdel(tmp);
+	nb = 0;
+	act = NULL;
+	while (!ant_nb && get_next_line(0, &tmp))
+		ant_nb = get_ant_nb(&tmp);
+	while (ant_nb > 0 && get_next_line(0, &tmp))
+		act = realloc_ar(&tmp, act, ++nb);
 	return (first);
 }

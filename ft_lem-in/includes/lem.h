@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/26 16:32:29 by atourner         ###   ########.fr       */
+/*   Updated: 2018/02/27 14:35:56 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ typedef struct	s_position
 
 typedef struct	s_room
 {
-	char		*name;
-	t_position	position;
-	int			start;
-	int			ant;
-	int			end;
-	t_position	link;
-	s_room		*next;
+	char				*name;
+	t_position			position;
+	int					start;
+	int					ant;
+	int					end;
+	struct s_room		*next;
 }				t_room;
 
-char			**ft_get_anthill();
+t_room			*ft_get_anthill();
+t_room			*create_room();
+void			free_all_room(t_room *first);
 
 #endif
