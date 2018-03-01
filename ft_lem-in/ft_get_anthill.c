@@ -37,7 +37,27 @@ static int		get_ant_nb(char **to_get)
 	return (ret);
 }
 
-/*int		valid_room(char *tmp)
+static int	start_link(t_room *first, char *str)
+{
+	t_room		*act;
+	int			link;
+
+	if (!first)
+		return (0);
+	act = first;
+	link = 0;
+	while (act)
+	{
+		if (ft_strstr(str, act->name))
+			link++;
+		if (link == 2)
+			return (1);
+		act = act->next;
+	}
+	return (0);
+}
+
+static int	valid_room(char *tmp)
 {
 	char	**separate_tmp;
 	int		len;
@@ -48,7 +68,7 @@ static int		get_ant_nb(char **to_get)
 	separate_tmp = ft_strsplit_space(tmp);
 	while (separate_tmp[len])
 		len++;
-	if (len < 3)
+	if (len < 3 || tmp[0] == 'L')
 		len = 0;
 	else if (ft_isstrdigit(separate_tmp[len - 1])
 			&& ft_isstrdigit(separate_tmp[len - 2]))
@@ -56,10 +76,8 @@ static int		get_ant_nb(char **to_get)
 	else
 		len = 0;
 	ft_free_ar((void**)separate_tmp);
-	if (!len)
-		ft_strdel(&tmp);
 	return (len);
-}*/
+}
 
 static char		**realloc_ar(char **tmp, char **act, int nb)
 {
@@ -79,6 +97,65 @@ static char		**realloc_ar(char **tmp, char **act, int nb)
 	return (new);
 }
 
+static int	parse_room(char *to_parse, t_room **first)
+{
+	int		i;
+	t_room	*act;
+
+	if (!*first)
+		*first = create_room();
+	else
+		(*first)->next = create_room();
+	act = ((*first)->next ? (*first)->next : *first);
+	i = (int)ft_strlen(to_parse);
+	while (ft_isdigit(to_parse[--i]))
+		;
+	act->position.y = ft_atoi(&to_parse[i + 1]);
+	while (ft_isdigit(to_parse[--i]))
+		;
+	act->position.x = ft_atoi(&to_parse[i + 1]);
+	act->name =  ft_strndup(to_parse, i);
+	return (1);
+}
+
+static	t_room	*parse(char **room)
+{
+	t_room		*ret;
+	int			i;
+	t_room		*act;
+	int			need_parse;
+
+	i = -1;
+	ret = NULL;
+	while (room[++i])
+	{
+		if (!(need_parse = valid_room(room[i])))
+		{
+			if (start_link(ret, room[i]))
+				break;
+			free_all_room(ret);
+			ft_free_ar((void**)room);
+			return (NULL);
+		}
+		if (need_parse != 2)
+		{
+			if (!ret)
+			{
+				parse_room(room[i], &ret);
+				act = ret;
+			}
+			else
+			{
+				parse_room(room[i], &act);
+				act = act->next;
+			}
+		}
+	}
+	for (act = ret; act->next; act = act->next)
+		ft_printf("%s %d %d\n", act->name, act->position.x, act->position.y);
+	return (ret);
+}
+
 t_room			*ft_get_anthill()
 {
 	char	*tmp;
@@ -87,7 +164,6 @@ t_room			*ft_get_anthill()
 	int		nb;
 	t_room	*first;
 
-	first = create_room();
 	ant_nb = 0;
 	nb = 0;
 	act = NULL;
@@ -95,5 +171,8 @@ t_room			*ft_get_anthill()
 		ant_nb = get_ant_nb(&tmp);
 	while (ant_nb > 0 && get_next_line(0, &tmp))
 		act = realloc_ar(&tmp, act, ++nb);
+	first = parse(act);
+	if (!first)
+		ft_printf("NULL\n");
 	return (first);
 }
