@@ -41,6 +41,7 @@ static int	start_link(t_room *first, char *str)
 {
 	t_room		*act;
 	int			link;
+	int			i;
 
 	if (!first)
 		return (0);
@@ -49,11 +50,22 @@ static int	start_link(t_room *first, char *str)
 	while (act)
 	{
 		if (ft_strstr(str, act->name))
+		{
+			ft_delete_part(&str, act->name);
 			link++;
+		}
 		if (link == 2)
-			return (1);
+		{
+		if (!*str)
+			i = 1;
+		else
+			i = 0;
+		ft_strdel(&str);
+			return (i);
+		}
 		act = act->next;
 	}
+	ft_strdel(&str);
 	return (0);
 }
 
@@ -131,7 +143,7 @@ static	t_room	*parse(char **room)
 	{
 		if (!(need_parse = valid_room(room[i])))
 		{
-			if (start_link(ret, room[i]))
+			if (start_link(ret, ft_strdup(room[i])))
 				break;
 			free_all_room(ret);
 			ft_free_ar((void**)room);

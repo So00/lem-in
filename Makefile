@@ -23,6 +23,7 @@ INCLUDES_LEM = ft_lem-in/includes
 SRC_LEM = ft_lem-in/lem-in.c\
 		  ft_lem-in/ft_get_anthill.c\
 		  ft_lem-in/mem_struct_room.c\
+		  ft_lem-in/parser2.c\
 
 COMP_LEM = $(SRC_LEM:.c=.o)
 

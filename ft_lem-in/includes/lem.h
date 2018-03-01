@@ -32,5 +32,6 @@ typedef struct	s_room
 t_room			*ft_get_anthill();
 t_room			*create_room();
 void			free_all_room(t_room *first);
+void			ft_delete_part(char **to_delete, char *search);
 
 #endif
