@@ -6,90 +6,12 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:30:29 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/27 16:07:17 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:06:14 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 #include "ft_printf.h"
-
-static int		get_ant_nb(char **to_get)
-{
-	int		len;
-	int		ret;
-
-	len = (int)ft_strlen(*to_get);
-	ret = 1;
-	if (!strcmp(*to_get, "##start\0")
-			|| !strcmp(*to_get, "##end\0") || !*to_get)
-		ret = -1;
-	if (ret > 0 && (*to_get)[0] == '#')
-		ret = 0;
-	if (ret > 0 && len > 10)
-		ret = -1;
-	if (ret > 0 && !ft_isstrdigit(*to_get))
-		ret = -1;
-	if (ret > 0 && len == 10 && ft_strcmp(*to_get, "2147483647\0") > 0)
-		ret = -1;
-	if (ret > 0)
-		ret = ft_atoi(*to_get);
-	ft_strdel(to_get);
-	return (ret);
-}
-
-static int	start_link(t_room *first, char *str)
-{
-	t_room		*act;
-	int			link;
-	int			i;
-
-	if (!first)
-		return (0);
-	act = first;
-	link = 0;
-	while (act)
-	{
-		if (ft_strstr(str, act->name))
-		{
-			ft_delete_part(&str, act->name);
-			link++;
-		}
-		if (link == 2)
-		{
-		if (!*str)
-			i = 1;
-		else
-			i = 0;
-		ft_strdel(&str);
-			return (i);
-		}
-		act = act->next;
-	}
-	ft_strdel(&str);
-	return (0);
-}
-
-static int	valid_room(char *tmp)
-{
-	char	**separate_tmp;
-	int		len;
-
-	len = 0;
-	if (tmp[0] == '#')
-		return (2);
-	separate_tmp = ft_strsplit_space(tmp);
-	while (separate_tmp[len])
-		len++;
-	if (len < 3 || tmp[0] == 'L')
-		len = 0;
-	else if (ft_isstrdigit(separate_tmp[len - 1])
-			&& ft_isstrdigit(separate_tmp[len - 2]))
-		len = 1;
-	else
-		len = 0;
-	ft_free_ar((void**)separate_tmp);
-	return (len);
-}
 
 static char		**realloc_ar(char **tmp, char **act, int nb)
 {
@@ -109,32 +31,25 @@ static char		**realloc_ar(char **tmp, char **act, int nb)
 	return (new);
 }
 
-static int	parse_room(char *to_parse, t_room **first)
+static void	parse_room(char *to_parse, t_room **first, int *command)
 {
-	int		i;
 	t_room	*act;
 
 	if (!*first)
-		*first = create_room();
+		*first = create_room(to_parse, command);
 	else
-		(*first)->next = create_room();
-	act = ((*first)->next ? (*first)->next : *first);
-	i = (int)ft_strlen(to_parse);
-	while (ft_isdigit(to_parse[--i]))
-		;
-	act->position.y = ft_atoi(&to_parse[i + 1]);
-	while (ft_isdigit(to_parse[--i]))
-		;
-	act->position.x = ft_atoi(&to_parse[i + 1]);
-	act->name =  ft_strndup(to_parse, i);
-	return (1);
+	{
+		act = *first;
+		while (act->next)
+			act = act->next;
+		act->next = create_room(to_parse, command);
+	}
 }
 
-static	t_room	*parse(char **room)
+static	t_room	*parse(char **room, int command, int ant_nb)
 {
 	t_room		*ret;
 	int			i;
-	t_room		*act;
 	int			need_parse;
 
 	i = -1;
@@ -146,25 +61,13 @@ static	t_room	*parse(char **room)
 			if (start_link(ret, ft_strdup(room[i])))
 				break;
 			free_all_room(ret);
-			ft_free_ar((void**)room);
 			return (NULL);
 		}
 		if (need_parse != 2)
-		{
-			if (!ret)
-			{
-				parse_room(room[i], &ret);
-				act = ret;
-			}
-			else
-			{
-				parse_room(room[i], &act);
-				act = act->next;
-			}
-		}
+			parse_room(room[i], &ret, &command);
+		get_command(room[i], &command);
 	}
-	for (act = ret; act->next; act = act->next)
-		ft_printf("%s %d %d\n", act->name, act->position.x, act->position.y);
+	do_link(ret, room, ant_nb, i);
 	return (ret);
 }
 
@@ -183,8 +86,7 @@ t_room			*ft_get_anthill()
 		ant_nb = get_ant_nb(&tmp);
 	while (ant_nb > 0 && get_next_line(0, &tmp))
 		act = realloc_ar(&tmp, act, ++nb);
-	first = parse(act);
-	if (!first)
-		ft_printf("NULL\n");
+	first = parse(act, 0, ant_nb);
+//	ft_free_ar((void**)act);
 	return (first);
 }

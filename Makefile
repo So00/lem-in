@@ -6,7 +6,7 @@
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 18:00:36 by atourner          #+#    #+#              #
-#    Updated: 2018/02/27 14:04:45 by atourner         ###   ########.fr        #
+#    Updated: 2018/03/02 11:37:20 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ INCLUDES_LEM = ft_lem-in/includes
 SRC_LEM = ft_lem-in/lem-in.c\
 		  ft_lem-in/ft_get_anthill.c\
 		  ft_lem-in/mem_struct_room.c\
+		  ft_lem-in/parser.c\
 		  ft_lem-in/parser2.c\
 
 COMP_LEM = $(SRC_LEM:.c=.o)

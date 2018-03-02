@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/02/27 14:35:56 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:06:44 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ typedef struct	s_room
 }				t_room;
 
 t_room			*ft_get_anthill();
-t_room			*create_room();
+t_room			*create_room(char *to_parse, int *command);
 void			free_all_room(t_room *first);
-void			ft_delete_part(char **to_delete, char *search);
+char			*ft_delete_part(char *to_delete, char *search);
+int				start_link(t_room *first, char *str);
+int				valid_room(char *tmp);
+int				get_ant_nb(char **to_get);
+void			get_command(char *str, int *command);
+void			do_link(t_room *first, char **room, int ant_nb, int i);
 
 #endif
