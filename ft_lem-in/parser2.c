@@ -77,15 +77,20 @@ char		*ft_delete_part(char *to_delete, char *search)
 		}
 	}
 	else
-		tmp = ft_strdup(tmp);
+	{
+		while (&to_delete[i + 1] != tmp)
+			i++;
+		tmp = ft_strndup(to_delete, i);
+	}
 	return (tmp);
 }
 
 void		do_link(t_room *first, char **room, int ant_nb, int i)
 {
-	while (room[++i])
+	while (room[i] && ant_nb)
 	{
-
-		ft_printf("[%s] [%s] [%d]\n", room[i], first->name, ant_nb);
+		ft_printf("[%s] [%s] [%d]\n", room[i], first->name, first->start);
+		ft_printf("%d\n", ant_nb = start_link(first, room[i]));
+		i++;
 	}
 }
