@@ -76,17 +76,19 @@ t_room			*ft_get_anthill()
 	char	*tmp;
 	int		ant_nb;
 	char	**act;
-	int		nb;
 	t_room	*first;
+	int		nb;
 
-	ant_nb = 0;
 	nb = 0;
+	ant_nb = 0;
 	act = NULL;
 	while (!ant_nb && get_next_line(0, &tmp))
 		ant_nb = get_ant_nb(&tmp);
 	while (ant_nb > 0 && get_next_line(0, &tmp))
 		act = realloc_ar(&tmp, act, ++nb);
 	first = parse(act, 0, ant_nb);
-//	ft_free_ar((void**)act);
+	ft_free_ar((void**)act);
+	for (int i = 0; act[i]; i++)
+		ft_printf("%d [%s]\n", i, act[i]);
 	return (first);
 }
