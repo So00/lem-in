@@ -6,29 +6,29 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:46 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/02 16:07:59 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/05 16:03:24 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "lem.h"
 
-int		search_arrival(t_room *first, char *str)
+t_room		*search_arrival(t_room *first, char *str)
 {
 	t_room	*act;
 	char	*tmp;
-	int		ret;
+	t_room	*ret;
 
 	if (!first || !str)
 		return (0);
 	act = first;
-	ret = 0;
+	ret = NULL;
 	while (act && !ret)
 	{
 		if (ft_strstr(str, act->name))
 		{
 			if (!(tmp = ft_delete_part(str, act->name)))
-				ret = 1;
+				ret = act;
 			else
 				ft_strdel(&tmp);
 		}
@@ -42,6 +42,8 @@ int		start_link(t_room *first, char *str)
 {
 	t_room	*act;
 	int		link;
+	t_room	*entry;
+	t_room	*out;
 
 	if (!first)
 		return (0);
@@ -50,8 +52,14 @@ int		start_link(t_room *first, char *str)
 	while (act)
 	{
 		if (ft_strstr(str, act->name))
-			if (search_arrival(act->next, ft_delete_part(str, act->name)))
+		{
+			entry = act;
+			if ((out = search_arrival(act->next, ft_delete_part(str, act->name))))
+			{
+				//create_link(entry, out);
 				link++;
+			}
+		}
 		act = act->next;
 	}
 	ft_strdel(&str);
@@ -85,12 +93,15 @@ char		*ft_delete_part(char *to_delete, char *search)
 	return (tmp);
 }
 
-void		do_link(t_room *first, char **room, int ant_nb, int i)
+void		do_link(t_room *first, char **room, int i)
 {
-	while (room[i] && ant_nb)
+	int		continu;
+
+	continu = 1;
+	while (room[i] && continu)
 	{
-		ft_printf("[%s] [%s] [%d]\n", room[i], first->name, first->start);
-		ft_printf("%d\n", ant_nb = start_link(first, room[i]));
+		if (room[i][0] != '#')
+			continu = start_link(first, ft_strdup(room[i]));
 		i++;
 	}
 }

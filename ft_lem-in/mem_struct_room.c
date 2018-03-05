@@ -6,14 +6,29 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 13:56:56 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/02 14:35:33 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/05 16:11:51 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 #include "ft_printf.h"
 
-t_room		*create_room(char *to_parse, int *command)
+static void	add_start_and_end(t_room *new, int *command, int ant_nb)
+{
+	if (*command == 1)
+	{
+		new->start = 1;
+		*command = 0;
+		new->ant_start = ant_nb;
+	}
+	else if (*command == 2)
+	{
+		new->end = 1;
+		*command = 0;
+	}
+}
+
+t_room		*create_room(char *to_parse, int *command, int ant_nb)
 {
 	t_room		*new;
 	int			i;
@@ -30,17 +45,19 @@ t_room		*create_room(char *to_parse, int *command)
 		;
 	new->position.x = ft_atoi(&to_parse[i + 1]);
 	new->name =  ft_strndup(to_parse, i);
-	if (*command == 1)
-	{
-		new->start = 1;
-		*command = 0;
-	}
-	else if (*command == 2)
-	{
-		new->end = 1;
-		*command = 0;
-	}
+	if (*command)
+		add_start_and_end(new, command, ant_nb);
 	return (new);
+}
+
+void		create_link(t_room *entry, t_room *out)
+{
+	t_link		*act;
+
+	if (!entry->link)
+		if (!(entry->link = malloc(sizeof(t_link))))
+			return ;
+	act = entry->link;
 }
 
 void		free_room(t_room *act)

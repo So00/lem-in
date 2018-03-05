@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:36 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/02 14:31:16 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/05 15:25:03 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ int		get_ant_nb(char **to_get)
 
 void	get_command(char *str, int *command)
 {
-	if (*command && !ft_strcmp("##start\0", str) && !ft_strcmp("##end\0", str))
+	if (*command && (!ft_strcmp("##start\0", str) || !ft_strcmp("##end\0", str)))
 		*command = -1;
 	else if (!ft_strcmp("##start\0", str))
 		*command = 1;
 	else if (!ft_strcmp("##end\0", str))
 		*command = 2;
+	else if (str[0] == '#' && str[1] == '#')
+		*command = -1;
 }
 
 int		valid_room(char *tmp)

@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:30:29 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/02 16:06:14 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/05 15:56:27 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ static char		**realloc_ar(char **tmp, char **act, int nb)
 	return (new);
 }
 
-static void	parse_room(char *to_parse, t_room **first, int *command)
+static void	parse_room(char *to_parse, t_room **first, int *command, int ant_nb)
 {
 	t_room	*act;
 
 	if (!*first)
-		*first = create_room(to_parse, command);
+		*first = create_room(to_parse, command, ant_nb);
 	else
 	{
 		act = *first;
 		while (act->next)
 			act = act->next;
-		act->next = create_room(to_parse, command);
+		act->next = create_room(to_parse, command, ant_nb);
 	}
 }
 
@@ -56,18 +56,21 @@ static	t_room	*parse(char **room, int command, int ant_nb)
 	ret = NULL;
 	while (room[++i])
 	{
-		if (!(need_parse = valid_room(room[i])))
+		if (!(need_parse = valid_room(room[i])) || command == -1)
 		{
-			if (start_link(ret, ft_strdup(room[i])))
+			if (start_link(ret, ft_strdup(room[i])) && test_anthill(ret))
 				break;
 			free_all_room(ret);
-			return (NULL);
+			ret = NULL;
+			break;
 		}
 		if (need_parse != 2)
-			parse_room(room[i], &ret, &command);
-		get_command(room[i], &command);
+			parse_room(room[i], &ret, &command, ant_nb);
+		else
+			get_command(room[i], &command);
 	}
-	do_link(ret, room, ant_nb, i);
+	if (ret)
+		do_link(ret, room, i);
 	return (ret);
 }
 
@@ -88,7 +91,5 @@ t_room			*ft_get_anthill()
 		act = realloc_ar(&tmp, act, ++nb);
 	first = parse(act, 0, ant_nb);
 	ft_free_ar((void**)act);
-	for (int i = 0; act[i]; i++)
-		ft_printf("%d [%s]\n", i, act[i]);
 	return (first);
 }

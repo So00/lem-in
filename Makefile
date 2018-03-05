@@ -6,7 +6,7 @@
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 18:00:36 by atourner          #+#    #+#              #
-#    Updated: 2018/03/02 11:37:20 by atourner         ###   ########.fr        #
+#    Updated: 2018/03/05 13:32:53 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_LEM = ft_lem-in/lem-in.c\
 		  ft_lem-in/mem_struct_room.c\
 		  ft_lem-in/parser.c\
 		  ft_lem-in/parser2.c\
+		  ft_lem-in/ft_check_room.c\
 
 COMP_LEM = $(SRC_LEM:.c=.o)
 
