@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/05 15:56:50 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/05 16:20:26 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_position
 
 typedef struct	s_link
 {
-	struct s_room		*link;
+	struct s_room		*room;
 	struct s_link		*next;
 }				t_link;
 
@@ -50,5 +50,6 @@ int				get_ant_nb(char **to_get);
 void			get_command(char *str, int *command);
 void			do_link(t_room *first, char **room, int i);
 int				test_anthill(t_room *first);
+void			create_link(t_room *entry, t_room *out);
 
 #endif

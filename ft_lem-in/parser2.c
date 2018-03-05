@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:46 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/05 16:03:24 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/05 16:19:54 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		start_link(t_room *first, char *str)
 			entry = act;
 			if ((out = search_arrival(act->next, ft_delete_part(str, act->name))))
 			{
-				//create_link(entry, out);
+				create_link(entry, out);
 				link++;
 			}
 		}
@@ -103,5 +103,11 @@ void		do_link(t_room *first, char **room, int i)
 		if (room[i][0] != '#')
 			continu = start_link(first, ft_strdup(room[i]));
 		i++;
+	}
+	for (t_room *act = first; act; act = act->next)
+	{
+		ft_printf("VOICI LA ROOM [%s]\n Elle est relliee a : \n", act->name);
+		for (t_link *actl = act->link; actl; actl = actl->next)
+			ft_printf("[%d] [%s]\n", i, act->link->name);
 	}
 }
