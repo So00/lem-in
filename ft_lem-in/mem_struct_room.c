@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 13:56:56 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/06 14:20:14 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/06 14:37:27 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,42 +47,6 @@ t_room		*create_room(char *to_parse, int *command, int ant_nb)
 	if (*command)
 		add_start_and_end(new, command, ant_nb);
 	return (new);
-}
-
-void		create_link(t_room *entry, t_room *out)
-{
-	t_link		*act;
-
-	if (!entry->link)
-	{
-		if (!(entry->link = ft_memalloc(sizeof(t_link))))
-			return ;
-		entry->link->room = out;
-	}
-	else
-	{
-		act = entry->link;
-		while (act->next)
-			act = act->next;
-		if (!(act->next = ft_memalloc(sizeof(t_link))))
-			return ;
-		act->next->room = out;
-	}
-	if (!out->link)
-	{
-			if (!(out->link = ft_memalloc(sizeof(t_link))))
-				return ;
-		out->link->room = entry;
-	}
-	else
-	{
-		act = out->link;
-		while (act->next)
-			act = act->next;
-		if (!(act->next = ft_memalloc(sizeof(t_link))))
-			return ;
-		act->next->room = entry;
-	}
 }
 
 void		free_room(t_room *act)

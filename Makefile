@@ -6,7 +6,7 @@
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 18:00:36 by atourner          #+#    #+#              #
-#    Updated: 2018/03/05 13:32:53 by atourner         ###   ########.fr        #
+#    Updated: 2018/03/06 14:37:50 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,13 @@ FLAGS = -Wall -Werror -Wextra
 
 INCLUDES_LEM = ft_lem-in/includes
 
-SRC_LEM = ft_lem-in/lem-in.c\
-		  ft_lem-in/ft_get_anthill.c\
-		  ft_lem-in/mem_struct_room.c\
-		  ft_lem-in/parser.c\
-		  ft_lem-in/parser2.c\
-		  ft_lem-in/ft_check_room.c\
+SRC_LEM =	ft_lem-in/lem-in.c\
+			ft_lem-in/ft_get_anthill.c\
+			ft_lem-in/mem_struct_room.c\
+			ft_lem-in/parser.c\
+			ft_lem-in/parser2.c\
+			ft_lem-in/ft_check_room.c\
+			ft_lem-in/create_link.c\
 
 COMP_LEM = $(SRC_LEM:.c=.o)
 
