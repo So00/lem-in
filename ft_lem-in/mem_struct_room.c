@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 13:56:56 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/05 16:22:00 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/06 14:20:14 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_room		*create_room(char *to_parse, int *command, int ant_nb)
 	if (!(new = (t_room*)malloc(sizeof(t_room))))
 		return (NULL);
 	ft_bzero(new, sizeof(t_room));
-	new->next = NULL;
 	while (ft_isdigit(to_parse[--i]))
 		;
 	new->position.y = ft_atoi(&to_parse[i + 1]);
@@ -55,23 +54,55 @@ void		create_link(t_room *entry, t_room *out)
 	t_link		*act;
 
 	if (!entry->link)
+	{
 		if (!(entry->link = ft_memalloc(sizeof(t_link))))
 			return ;
-	act = entry->link;
-	while (act->next)
-		act = act->next;
-	act->room = out;
-	if (!out->link)
-		if (!(out->link = ft_memalloc(sizeof(t_link))))
+		entry->link->room = out;
+	}
+	else
+	{
+		act = entry->link;
+		while (act->next)
+			act = act->next;
+		if (!(act->next = ft_memalloc(sizeof(t_link))))
 			return ;
-	act = out->link;
-	while (act->next)
-		act = act->next;
-	act->room = entry;
+		act->next->room = out;
+	}
+	if (!out->link)
+	{
+			if (!(out->link = ft_memalloc(sizeof(t_link))))
+				return ;
+		out->link->room = entry;
+	}
+	else
+	{
+		act = out->link;
+		while (act->next)
+			act = act->next;
+		if (!(act->next = ft_memalloc(sizeof(t_link))))
+			return ;
+		act->next->room = entry;
+	}
 }
 
 void		free_room(t_room *act)
 {
+	t_link		*nextL;
+	t_link		*actL;
+
+	if (act->name)
+		ft_strdel(&act->name);
+	if ((actL = act->link))
+	{
+		nextL = actL->next;
+		while (actL)
+		{
+			free(actL);
+			actL = nextL;
+			if (nextL)
+				nextL = nextL->next;
+		}
+	}
 	ft_bzero(act, sizeof(t_room));
 	free(act);
 }
@@ -84,8 +115,6 @@ void		free_all_room(t_room *first)
 	while (next)
 	{
 		next = first->next;
-		if (first->name)
-			ft_strdel(&first->name);
 		free_room(first);
 		first = next;
 	}
