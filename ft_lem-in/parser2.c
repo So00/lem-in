@@ -101,8 +101,6 @@ void		do_link(t_room *first, char **room, int i)
 	{
 		if (room[i][0] != '#')
 			continu = start_link(first, ft_strdup(room[i]));
-		else if (room[i][0] == '#' && room[i][1] == '#')
-			break;
 		i++;
 	}
 /*	for (t_room *act = first; act; act = act->next)

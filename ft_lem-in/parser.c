@@ -45,8 +45,6 @@ void	get_command(char *str, int *command)
 		*command = 1;
 	else if (!ft_strcmp("##end\0", str))
 		*command = 2;
-	else if (str[0] == '#' && str[1] == '#')
-		*command = -1;
 }
 
 int		valid_room(char *tmp)

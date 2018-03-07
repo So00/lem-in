@@ -10,8 +10,18 @@
 #                                                                              #
 # **************************************************************************** #
 
-valid=valid_map
-valid_long=valid_map_long_way
-non_valid=map_non_valid
+INCLUDES_LIB=includes
 
+all: cpy_lem error_comp error_test
 
+cpy_lem:
+	cp ../lem-in .
+
+error_comp:
+	gcc test_error.c -I$(INCLUDES_LIB) libftprintf.a -o error
+
+error_test:
+	sh error.sh
+
+clean:
+	rm -rf error lem-in
