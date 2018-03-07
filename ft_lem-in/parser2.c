@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:46 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/06 13:55:45 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/07 14:10:34 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		start_link(t_room *first, char *str)
 		if (ft_strstr(str, act->name))
 		{
 			entry = act;
+			out = act;
 			if ((out = search_arrival(act->next, ft_delete_part(str, act->name))))
 			{
 				create_link(entry, out);
@@ -109,7 +110,7 @@ void		do_link(t_room *first, char **room, int i)
 	for (t_room *act = first; act; act = act->next)
 	{
 		t_room	*new;
-		ft_printf("\nVOICI LA ROOM [%s]\n			Elle est relliee a : \n", act->name);
+		ft_printf("\nVOICI LA ROOM [%s] [%d] [%d]\n			Elle est relliee a : \n", act->name, act->start, act->end);
 		for (t_link *actl = act->link; actl; actl = actl->next)
 		{
 			new = actl->room;

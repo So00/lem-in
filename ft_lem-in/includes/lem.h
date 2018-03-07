@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/05 16:22:03 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/07 13:26:45 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ typedef struct	s_room
 {
 	char				*name;
 	t_position			position;
-	bool				start;
-	int					ant;
-	int					ant_start;
+	int					start;
+	int					act_ant;
 	bool				end;
-	bool				visited;
 	struct s_room		*next;
+	struct s_room		*parent;
 	struct s_link		*link;
 }				t_room;
 
@@ -51,5 +50,6 @@ void			get_command(char *str, int *command);
 void			do_link(t_room *first, char **room, int i);
 int				test_anthill(t_room *first);
 void			create_link(t_room *entry, t_room *out);
+int				no_way_to_end(t_room *first);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 13:56:56 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/06 14:37:27 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/07 14:15:28 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ static void	add_start_and_end(t_room *new, int *command, int ant_nb)
 {
 	if (*command == 1)
 	{
-		new->start = 1;
+		new->start = ant_nb;
 		*command = 0;
-		new->ant_start = ant_nb;
 	}
 	else if (*command == 2)
 	{

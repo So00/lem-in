@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 11:51:09 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/05 15:09:17 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/07 14:02:50 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int		test_anthill(t_room *first)
 		{
 			if (!strcmp(test->name, act->name))
 				return (0);
-			if (test->position.x == act->position.x && test->position.y == act->position.y)
+			if (test->position.x == act->position.x
+					&& test->position.y == act->position.y)
 				return (0);
 			if ((test->start && act->start) || (test->end && act->end))
 				return (0);

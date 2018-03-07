@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:49:58 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/05 09:59:41 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/07 13:47:07 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 int		main()
 {
 	t_room		*anthill;
+	int			shortest;
 
 	anthill = ft_get_anthill();
-	if (!anthill)
+	if (!anthill || !(shortest = no_way_to_end(anthill)))
 		ft_printf("ERROR\n");
-	if (anthill)
+	else
+	{
 		free_all_room(anthill);
+	}
 return (0);
 }
