@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:46 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/07 14:10:34 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/07 15:42:44 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		start_link(t_room *first, char *str)
 {
 	t_room	*act;
 	int		link;
-	t_room	*entry;
 	t_room	*out;
 
 	if (!first)
@@ -53,11 +52,9 @@ int		start_link(t_room *first, char *str)
 	{
 		if (ft_strstr(str, act->name))
 		{
-			entry = act;
-			out = act;
 			if ((out = search_arrival(act->next, ft_delete_part(str, act->name))))
 			{
-				create_link(entry, out);
+				create_link(act, out);
 				link++;
 			}
 		}
@@ -89,7 +86,8 @@ char		*ft_delete_part(char *to_delete, char *search)
 	{
 		while (&to_delete[i + 1] != tmp)
 			i++;
-		tmp = ft_strndup(to_delete, i);
+		tmp = ft_strndup(to_delete,
+				(ft_strcmp(&to_delete[i + 1], search) ? i + 1 : i));
 	}
 	return (tmp);
 }
@@ -107,7 +105,7 @@ void		do_link(t_room *first, char **room, int i)
 			break;
 		i++;
 	}
-	for (t_room *act = first; act; act = act->next)
+/*	for (t_room *act = first; act; act = act->next)
 	{
 		t_room	*new;
 		ft_printf("\nVOICI LA ROOM [%s] [%d] [%d]\n			Elle est relliee a : \n", act->name, act->start, act->end);
@@ -116,5 +114,5 @@ void		do_link(t_room *first, char **room, int i)
 			new = actl->room;
 			ft_printf("					[%s]\n", new->name);
 		}
-	}
+	}*/
 }

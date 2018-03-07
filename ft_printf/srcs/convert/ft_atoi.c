@@ -6,15 +6,17 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 15:49:38 by atourner          #+#    #+#             */
-/*   Updated: 2018/01/20 16:44:30 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/07 14:44:42 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static long		ft_power(long nb)
+#include "libft.h"
+
+static long		ft_power_act(long nb)
 {
 	if (nb == 0 || nb == -1)
 		return (1);
-	return (10 * ft_power(nb - 1));
+	return (10 * ft_power_act(nb - 1));
 }
 
 static int		ft_final_nbr(const char *str, long sign, long j, long i)
@@ -70,7 +72,7 @@ int				ft_atoi(const char *str)
 	sign = 1;
 	while (str[i] && (str[i] == '\n' || str[i] == '\t' || str[i] == ' '
 			|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r'
-			|| str[i] == '0'))
+			|| (str[i] == '0' && ft_isdigit(str[i + 1]))))
 		i++;
 	if (str[i] == '-')
 		sign = -1;
@@ -82,5 +84,5 @@ int				ft_atoi(const char *str)
 		return (0);
 	if (j >= 19 && ft_test_long(str, j, sign, i) != 1)
 		return (ft_test_long(str, j, sign, i));
-	return (ft_final_nbr(str, sign, ft_power(j - 1), i));
+	return (ft_final_nbr(str, sign, ft_power_act(j - 1), i));
 }
