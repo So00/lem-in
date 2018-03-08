@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 13:56:56 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/07 14:41:08 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:57:25 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,26 @@ void		free_all_room(t_room *first)
 		next = first->next;
 		free_room(first);
 		first = next;
+	}
+}
+
+void		free_room_if(t_room *open, t_room *closed)
+{
+	t_room		*actO;
+	t_room		*actC;
+
+	actC = closed;
+	while (actC)
+	{
+		actO = open;
+		while (actO)
+		{
+			if (!ft_strcmp(actO->name, actC->name))
+				break;
+			else if (!actO->next)
+				free_room(actC);
+			actO = actO->next;
+		}
+		actC = actC->next;
 	}
 }

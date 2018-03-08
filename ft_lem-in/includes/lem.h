@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/07 13:26:45 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/08 16:23:53 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_room
 t_room			*ft_get_anthill();
 t_room			*create_room(char *to_parse, int *command, int ant_nb);
 void			free_all_room(t_room *first);
+void			free_room_if(t_room *open, t_room *closed);
 char			*ft_delete_part(char *to_delete, char *search);
 int				start_link(t_room *first, char *str);
 int				valid_room(char *tmp);
@@ -50,6 +51,6 @@ void			get_command(char *str, int *command);
 void			do_link(t_room *first, char **room, int i);
 int				test_anthill(t_room *first);
 void			create_link(t_room *entry, t_room *out);
-int				no_way_to_end(t_room *first);
+t_room			*no_way_to_end(t_room *first);
 
 #endif

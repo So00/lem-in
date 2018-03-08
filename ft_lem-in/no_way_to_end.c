@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:18:04 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/07 15:39:34 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/08 16:07:49 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void		add_all_next(t_room *open, t_room *closed)
 	}
 }
 
-int			no_way_to_end(t_room *anthill)
+t_room		*no_way_to_end(t_room *anthill)
 {
 	t_room				*open;
 	t_room				*closed;
@@ -73,12 +73,8 @@ int			no_way_to_end(t_room *anthill)
 		add_all_next(open, closed);
 		if (open->end)
 		{
-			while (open)
-			{
-				ft_printf("%s\n", open->name);
-				open = open->parent;
-			}
-			return (1);
+			free_room_if(open, closed);
+			return (open);
 		}
 		if (!closed)
 		{
@@ -92,5 +88,7 @@ int			no_way_to_end(t_room *anthill)
 		}
 		open = open->next;
 	}
-	return (0);
+	free_all_room(open);
+	free_all_room(closed);
+	return (NULL);
 }
