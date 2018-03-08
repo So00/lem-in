@@ -87,19 +87,21 @@ void		free_room_if(t_room *open, t_room *closed)
 {
 	t_room		*actO;
 	t_room		*actC;
+	t_room		*tmp;
 
 	actC = closed;
 	while (actC)
 	{
 		actO = open;
+		tmp = actC->next;
 		while (actO)
 		{
 			if (!ft_strcmp(actO->name, actC->name))
 				break;
-			else if (!actO->next)
+			else if (!actO->parent)
 				free_room(actC);
-			actO = actO->next;
+			actO = actO->parent;
 		}
-		actC = actC->next;
+		actC = tmp;
 	}
 }

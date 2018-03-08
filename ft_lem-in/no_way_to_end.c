@@ -16,10 +16,19 @@
 static t_room	*cpy_room(t_room *to_cpy)
 {
 	t_room		*new;
+	t_link		*actL;
 
 	if (!(new = malloc(sizeof(t_room))))
 		return (NULL);
+	actL = to_cpy->link;
 	ft_memcpy(new, to_cpy, sizeof(t_room));
+	new->name = ft_strdup(to_cpy->name);
+	new->link = NULL;
+	while (actL)
+	{
+		create_link(new, actL->room);
+		actL = actL->next;
+	}
 	new->next = NULL;
 	new->parent = NULL;
 	return (new);

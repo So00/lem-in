@@ -23,9 +23,12 @@ int		main()
 		ft_printf("ERROR\n");
 	else
 	{
+		for (t_room *act = anthill; act; act = act->next)
+			ft_printf("ANTHILL %s\n", act->name);
+			ft_printf("\n\n");
 		for (t_room *act = shortest; act; act = act->parent)
-			ft_printf("%s\n", act->name);
-		free_all_room(anthill);
+			ft_printf("SHORTEST %s\n", act->name);
+free_all_room(anthill);
 	}
 return (0);
 }
