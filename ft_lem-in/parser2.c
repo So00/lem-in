@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:46 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/07 16:16:34 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/08 10:49:33 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void		do_link(t_room *first, char **room, int i)
 	{
 		if (room[i][0] != '#')
 			continu = start_link(first, ft_strdup(room[i]));
+		else if (!ft_strcmp(room[i], "##start") || !ft_strcmp(room[i], "##end"))
+			break;
 		i++;
 	}
 /*	for (t_room *act = first; act; act = act->next)

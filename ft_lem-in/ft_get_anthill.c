@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:30:29 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/07 14:46:14 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/08 13:16:31 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static	t_room	*parse(char **room, int command, int ant_nb)
 
 	i = -1;
 	ret = NULL;
+	if (ant_nb <= 0)
+		return (ret);
 	while (room[++i])
 	{
 		if (!(need_parse = valid_room(room[i])) || command == -1)
@@ -87,7 +89,7 @@ t_room			*ft_get_anthill()
 	act = NULL;
 	while (!ant_nb && get_next_line(0, &tmp))
 		ant_nb = get_ant_nb(&tmp);
-	while (ant_nb > 0 && get_next_line(0, &tmp))
+	while (get_next_line(0, &tmp))
 		act = realloc_ar(&tmp, act, ++nb);
 	first = parse(act, 0, ant_nb);
 	ft_free_ar((void**)act);

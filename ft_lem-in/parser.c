@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:36 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/05 15:25:03 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/08 10:37:36 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		get_ant_nb(char **to_get)
 
 	len = (int)ft_strlen(*to_get);
 	ret = 1;
+	if (!to_get)
+		ret = -1;
 	if (!strcmp(*to_get, "##start\0")
 			|| !strcmp(*to_get, "##end\0") || !*to_get)
 		ret = -1;
