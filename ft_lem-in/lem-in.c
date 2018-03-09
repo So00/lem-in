@@ -23,12 +23,19 @@ int		main()
 		ft_printf("ERROR\n");
 	else
 	{
+		reverse_room(&shortest);
+		free_room_used(anthill, shortest);
+//		t_room *second = no_way_to_end(anthill);
+//		reverse_room(&second);
 		for (t_room *act = anthill; act; act = act->next)
 			ft_printf("ANTHILL %s\n", act->name);
 			ft_printf("\n\n");
-		for (t_room *act = shortest; act; act = act->parent)
+		for (t_room *act = shortest; act; act = act->next)
 			ft_printf("SHORTEST %s\n", act->name);
-free_all_room(anthill);
+	//	for (t_room *act = second; act; act = act->next)
+	//		ft_printf("SHORTEST %s\n", act->name);
 	}
+	if (anthill)
+		free_all_room(anthill);
 return (0);
 }

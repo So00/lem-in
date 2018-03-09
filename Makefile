@@ -22,12 +22,14 @@ INCLUDES_LEM = ft_lem-in/includes
 
 SRC_LEM =	ft_lem-in/lem-in.c\
 			ft_lem-in/ft_get_anthill.c\
-			ft_lem-in/mem_struct_room.c\
 			ft_lem-in/parser.c\
+			ft_lem-in/mem_struct_room.c\
+			ft_lem-in/mem_struct_room2.c\
 			ft_lem-in/parser2.c\
 			ft_lem-in/ft_check_room.c\
 			ft_lem-in/create_link.c\
 			ft_lem-in/no_way_to_end.c\
+			ft_lem-in/reverse.c\
 
 COMP_LEM = $(SRC_LEM:.c=.o)
 

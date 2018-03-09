@@ -52,5 +52,7 @@ void			do_link(t_room *first, char **room, int i);
 int				test_anthill(t_room *first);
 void			create_link(t_room *entry, t_room *out);
 t_room			*no_way_to_end(t_room *first);
+void			reverse_room(t_room **reverse);
+void			free_room_used(t_room *anthill, t_room *way);
 
 #endif
