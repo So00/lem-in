@@ -17,6 +17,7 @@ int		main()
 {
 	t_room		*anthill;
 	t_room		*shortest;
+	t_room		*act_S;
 
 	anthill = ft_get_anthill();
 	if (!anthill || !(shortest = no_way_to_end(anthill)))
@@ -25,15 +26,22 @@ int		main()
 	{
 		reverse_room(&shortest);
 		free_room_used(anthill, shortest);
-//		t_room *second = no_way_to_end(anthill);
-//		reverse_room(&second);
+		act_S = shortest;
+		while ((act_S->parent = no_way_to_end(anthill)))
+		{
+			reverse_room(&act_S->parent);
+			free_room_used(anthill, act_S->parent);
+			act_S = act_S->parent;
+		}
 		for (t_room *act = anthill; act; act = act->next)
 			ft_printf("ANTHILL %s\n", act->name);
-			ft_printf("\n\n");
-		for (t_room *act = shortest; act; act = act->next)
-			ft_printf("SHORTEST %s\n", act->name);
-	//	for (t_room *act = second; act; act = act->next)
-	//		ft_printf("SHORTEST %s\n", act->name);
+		ft_printf("\n\n");
+		int i = 0;
+		for (act_S = shortest; act_S; act_S = act_S->parent, i++)
+		{
+			for (t_room *act = act_S; act; act = act->next)
+				ft_printf("shortest %d  %s\n", i, act->name);
+		}
 	}
 	if (anthill)
 		free_all_room(anthill);
