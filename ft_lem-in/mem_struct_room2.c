@@ -90,7 +90,7 @@ void	free_room_used(t_room *anthill, t_room *way)
 	}
 */
 	//ANCIEN
-/*	if (way->start && way->next->end)
+	if (way->start && way->next->end)
 	{
 		actw = way;
 		while (actw)
@@ -98,11 +98,11 @@ void	free_room_used(t_room *anthill, t_room *way)
 			act = anthill;
 			while (ft_strcmp(act->name, actw->name))
 				act = act->next;
-			free_link_used(act->link, anthill, act->name);
+			free_link_used(anthill, act->name);
 			actw = actw->next;
 		}
 	}
-	else*/
+	else
 	while (actw)
 	{
 		act = anthill;
