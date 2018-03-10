@@ -42,6 +42,7 @@ typedef struct	s_room
 t_room			*ft_get_anthill();
 t_room			*create_room(char *to_parse, int *command, int ant_nb);
 void			free_all_room(t_room *first);
+void			free_room(t_room *act);
 void			free_room_if(t_room *open, t_room *closed);
 char			*ft_delete_part(char *to_delete, char *search);
 int				start_link(t_room *first, char *str);

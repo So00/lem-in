@@ -49,6 +49,17 @@ void	get_command(char *str, int *command)
 		*command = 2;
 }
 
+int		check_max_int(char *str)
+{
+	int		len;
+
+	if ((len = ft_strlen(str) - 1) > 10)
+		return (0);
+	if (len == 10 && ft_strcmp("2147483647", str))
+		return (0);
+	return (1);
+}
+
 int		valid_room(char *tmp)
 {
 	char	**separate_tmp;
@@ -63,7 +74,9 @@ int		valid_room(char *tmp)
 	if (len < 3 || tmp[0] == 'L')
 		len = 0;
 	else if (ft_isstrdigit(separate_tmp[len - 1])
-			&& ft_isstrdigit(separate_tmp[len - 2]))
+			&& check_max_int(separate_tmp[len - 1])
+			&& ft_isstrdigit(separate_tmp[len - 2])
+			&& check_max_int(separate_tmp[len - 2]))
 		len = 1;
 	else
 		len = 0;

@@ -75,7 +75,10 @@ t_room		*no_way_to_end(t_room *anthill)
 	t_room				*closed;
 	t_room				*act;
 
-	open = cpy_room(anthill);
+	open = anthill;
+	while (!open->start)
+		open = open->next;
+	open = cpy_room(open);
 	closed = NULL;
 	while (open)
 	{
