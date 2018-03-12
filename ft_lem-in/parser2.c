@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:46 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/08 15:37:23 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/12 14:58:04 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,4 @@ void		do_link(t_room *first, char **room, int i)
 			break;
 		i++;
 	}
-	/*for (t_room *act = first; act; act = act->next)
-	{
-		t_room	*new;
-		ft_printf("\nVOICI LA ROOM [%s] [%d] [%d]\n			Elle est relliee a : \n", act->name, act->start, act->end);
-		for (t_link *actl = act->link; actl; actl = actl->next)
-		{
-			new = actl->room;
-			ft_printf("					[%s]\n", new->name);
-		}
-	}*/
 }

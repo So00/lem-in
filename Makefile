@@ -6,7 +6,7 @@
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 18:00:36 by atourner          #+#    #+#              #
-#    Updated: 2018/03/07 16:15:55 by atourner         ###   ########.fr        #
+#    Updated: 2018/03/12 16:18:56 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_LEM =	ft_lem-in/lem-in.c\
 			ft_lem-in/create_link.c\
 			ft_lem-in/no_way_to_end.c\
 			ft_lem-in/reverse.c\
+			ft_lem-in/solve.c\
 
 COMP_LEM = $(SRC_LEM:.c=.o)
 

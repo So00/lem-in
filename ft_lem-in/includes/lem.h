@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/08 16:23:53 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/12 16:18:00 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_room
 	int					start;
 	int					act_ant;
 	bool				end;
+	int					len;
 	struct s_room		*next;
 	struct s_room		*parent;
 	struct s_link		*link;
@@ -55,5 +56,6 @@ void			create_link(t_room *entry, t_room *out);
 t_room			*no_way_to_end(t_room *first);
 void			reverse_room(t_room **reverse);
 void			free_room_used(t_room *anthill, t_room *way);
+void			solve(t_room *all_path);
 
 #endif

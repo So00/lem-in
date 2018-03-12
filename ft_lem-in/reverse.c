@@ -1,6 +1,21 @@
 #include "lem.h"
 #include "ft_printf.h"
 
+int		len_of_path(t_room *path)
+{
+	t_room	*act;
+	int		i;
+
+	i = 0;
+	act = path;
+	while (act)
+	{
+		i++;
+		act = act->next;
+	}
+	return(i - 1);
+}
+
 void	reverse_room(t_room **to_reverse)
 {
 	t_room		*last;
@@ -26,4 +41,5 @@ void	reverse_room(t_room **to_reverse)
 		last->parent = NULL;
 		tmp = tmp->next;
 	}
+	(*to_reverse)->len = len_of_path(*to_reverse);
 }

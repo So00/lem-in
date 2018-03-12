@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:30:29 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/08 15:34:16 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/12 14:15:51 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,12 @@ static	t_room	*parse(char **room, int command, int ant_nb)
 
 	i = -1;
 	ret = NULL;
-	if (ant_nb <= 0)
-		return (ret);
-	while (room[++i])
+	while (ant_nb > 0 && room[++i])
 	{
 		if (!(need_parse = valid_room(room[i])) || command == -1)
 		{
-			if (start_link(ret, ft_strdup(room[i])) && test_anthill(ret))
+			if (!command && start_link(ret, ft_strdup(room[i]))
+					&& test_anthill(ret))
 				break;
 			free_all_room(ret);
 			ret = NULL;
