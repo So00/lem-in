@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:49:58 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/12 16:18:33 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/13 14:37:31 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main()
 		reverse_room(&shortest);
 		free_room_used(anthill, shortest);
 		act_S = shortest;
-		while ((act_S->parent = no_way_to_end(anthill)))
+		while (act_S->len <= shortest->start && (act_S->parent = no_way_to_end(anthill)))
 		{
 			reverse_room(&act_S->parent);
 			free_room_used(anthill, act_S->parent);
@@ -43,10 +43,9 @@ int		main()
 			ft_printf("The len is %d\n", act_S->len);
 			for (t_room *act = act_S; act; act = act->next)
 				ft_printf("shortest %d  %s\n", i, act->name);
-		}
-	}*/
+		}*/
+	}
 	if (anthill)
 		free_all_room(anthill);
-return (0);
-	}
+	return (0);
 }

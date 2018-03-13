@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/12 16:18:00 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/13 15:52:38 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_room
 	t_position			position;
 	int					start;
 	int					act_ant;
+	int					next_ant;
 	bool				end;
 	int					len;
 	struct s_room		*next;
