@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 11:18:04 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/13 14:36:43 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/14 17:11:39 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_room	*cpy_room(t_room *to_cpy)
 	return (new);
 }
 
-static int		not_closed(t_room *to_add, t_room *closed)
+static int		ft_closed(t_room *to_add, t_room *closed)
 {
 	t_room		*act;
 
@@ -59,7 +59,7 @@ static void		add_all_next(t_room *open, t_room *closed)
 		add = add->next;
 	while (act)
 	{
-		if (!not_closed(act->room, closed))
+		if (!ft_closed(act->room, closed))
 		{
 			add->next = cpy_room(act->room);
 			add = add->next;
