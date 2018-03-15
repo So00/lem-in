@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
+/*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 10:49:58 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/15 12:08:19 by atourner         ###   ########.fr       */
+/*   Created: 2018/03/15 12:52:50 by atourner          #+#    #+#             */
+/*   Updated: 2018/03/15 12:52:54 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 void	get_next_path(t_room *shortest, t_room *anthill)
 {
-	t_room		*act_S;
+	t_room		*act_s;
 
-	act_S = shortest;
-	while (act_S->len < shortest->start
-			&& (act_S->parent = no_way_to_end(anthill)))
-		{
-			reverse_room(&act_S->parent);
-			free_room_used(anthill, act_S->parent);
-			act_S = act_S->parent;
-		}
+	act_s = shortest;
+	while (act_s->len < shortest->start
+			&& (act_s->parent = no_way_to_end(anthill)))
+	{
+		reverse_room(&act_s->parent);
+		free_room_used(anthill, act_s->parent);
+		act_s = act_s->parent;
+	}
 }
 
 int		main(int ac, char **av)
