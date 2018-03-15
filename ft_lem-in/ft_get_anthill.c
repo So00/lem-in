@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:30:29 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/12 14:15:51 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/15 13:41:09 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static char		**realloc_ar(char **tmp, char **act, int nb)
 	return (new);
 }
 
-static void	parse_room(char *to_parse, t_room **first, int *command, int ant_nb)
+static void		parse_room(char *to_parse, t_room **first,
+		int *command, int ant_nb)
 {
 	t_room	*act;
 
@@ -60,10 +61,10 @@ static	t_room	*parse(char **room, int command, int ant_nb)
 		{
 			if (!command && start_link(ret, ft_strdup(room[i]))
 					&& test_anthill(ret))
-				break;
+				break ;
 			free_all_room(ret);
 			ret = NULL;
-			break;
+			break ;
 		}
 		if (need_parse != 2)
 			parse_room(room[i], &ret, &command, ant_nb);
@@ -75,7 +76,7 @@ static	t_room	*parse(char **room, int command, int ant_nb)
 	return (ret);
 }
 
-t_room			*ft_get_anthill()
+t_room			*ft_get_anthill(void)
 {
 	char	*tmp;
 	int		ant_nb;

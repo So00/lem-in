@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/02 11:24:46 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/12 14:58:04 by atourner         ###   ########.fr       */
+/*   Created: 2018/03/15 14:58:24 by atourner          #+#    #+#             */
+/*   Updated: 2018/03/15 15:20:02 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ t_room		*search_arrival(t_room *first, char *str)
 	t_room	*ret;
 
 	if (!first || !str)
+	{
+		if (str)
+			ft_strdel(&str);
 		return (0);
+	}
 	act = first;
 	ret = NULL;
 	while (act && !ret)
@@ -38,7 +42,7 @@ t_room		*search_arrival(t_room *first, char *str)
 	return (ret);
 }
 
-int		start_link(t_room *first, char *str)
+int			start_link(t_room *first, char *str)
 {
 	t_room	*act;
 	int		link;
@@ -52,7 +56,8 @@ int		start_link(t_room *first, char *str)
 	{
 		if (ft_strstr(str, act->name))
 		{
-			if ((out = search_arrival(act->next, ft_delete_part(str, act->name))))
+			if ((out = search_arrival(act->next,
+							ft_delete_part(str, act->name))))
 			{
 				create_link(act, out);
 				link++;
@@ -102,7 +107,7 @@ void		do_link(t_room *first, char **room, int i)
 		if (room[i][0] != '#')
 			continu = start_link(first, ft_strdup(room[i]));
 		else if (!ft_strcmp(room[i], "##start") || !ft_strcmp(room[i], "##end"))
-			break;
+			break ;
 		i++;
 	}
 }

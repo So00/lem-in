@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:36 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/08 10:37:36 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/15 14:57:08 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int		get_ant_nb(char **to_get)
 
 void	get_command(char *str, int *command)
 {
-	if (*command && (!ft_strcmp("##start\0", str) || !ft_strcmp("##end\0", str)))
+	if (*command && (!ft_strcmp("##start\0", str)
+				|| !ft_strcmp("##end\0", str)))
 		*command = -1;
 	else if (!ft_strcmp("##start\0", str))
 		*command = 1;

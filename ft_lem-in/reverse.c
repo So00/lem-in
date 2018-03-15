@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reverse.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/15 14:59:09 by atourner          #+#    #+#             */
+/*   Updated: 2018/03/15 14:59:10 by atourner         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem.h"
 #include "ft_printf.h"
 
@@ -13,7 +25,7 @@ int		len_of_path(t_room *path)
 		i++;
 		act = act->next;
 	}
-	return(i - 1);
+	return (i - 1);
 }
 
 void	reverse_room(t_room **to_reverse)
@@ -34,7 +46,7 @@ void	reverse_room(t_room **to_reverse)
 	{
 		last = first;
 		if (!last->parent)
-			break;
+			break ;
 		while (last->parent && ft_strcmp(last->parent->name, tmp->name))
 			last = last->parent;
 		tmp->next = last;

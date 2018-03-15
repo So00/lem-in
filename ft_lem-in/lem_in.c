@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 12:52:50 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/15 12:52:54 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/15 15:33:39 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		main(int ac, char **av)
 {
 	t_room		*anthill;
 	t_room		*shortest;
+	t_room		*act;
 
 	anthill = ft_get_anthill();
 	if (!anthill || !(shortest = no_way_to_end(anthill)))
@@ -42,6 +43,13 @@ int		main(int ac, char **av)
 		if (ac == 1 || ft_strcmp(av[1], "-S"))
 			get_next_path(shortest, anthill);
 		solve(shortest);
+		act = shortest;
+		while (act)
+		{
+			shortest = shortest->parent;
+			free_all_room(act);
+			act = shortest;
+		}
 	}
 	if (anthill)
 		free_all_room(anthill);

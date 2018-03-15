@@ -6,7 +6,7 @@
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 18:00:36 by atourner          #+#    #+#              #
-#    Updated: 2018/03/15 12:53:06 by atourner         ###   ########.fr        #
+#    Updated: 2018/03/15 15:40:11 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIB = ft_printf/libftprintf.a
 
 INCLUDES_LIB = ft_printf/includes
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 INCLUDES_LEM = ft_lem-in/includes
 

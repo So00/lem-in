@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 13:56:56 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/08 15:57:25 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/15 15:23:00 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_room		*create_room(char *to_parse, int *command, int ant_nb)
 	while (ft_isdigit(to_parse[--i]))
 		;
 	new->position.x = ft_atoi(&to_parse[i + 1]);
-	new->name =  ft_strndup(to_parse, i);
+	new->name = ft_strndup(to_parse, i);
 	if (*command)
 		add_start_and_end(new, command, ant_nb);
 	return (new);
@@ -50,20 +50,20 @@ t_room		*create_room(char *to_parse, int *command, int ant_nb)
 
 void		free_room(t_room *act)
 {
-	t_link		*nextL;
-	t_link		*actL;
+	t_link		*nextl;
+	t_link		*actl;
 
 	if (act->name)
 		ft_strdel(&act->name);
-	if ((actL = act->link))
+	if ((actl = act->link))
 	{
-		nextL = actL->next;
-		while (actL)
+		nextl = actl->next;
+		while (actl)
 		{
-			free(actL);
-			actL = nextL;
-			if (nextL)
-				nextL = nextL->next;
+			free(actl);
+			actl = nextl;
+			if (nextl)
+				nextl = nextl->next;
 		}
 	}
 	ft_bzero(act, sizeof(t_room));
@@ -75,7 +75,7 @@ void		free_all_room(t_room *first)
 	t_room	*next;
 
 	next = first;
-	while (next)
+	while (first)
 	{
 		next = first->next;
 		free_room(first);
@@ -85,23 +85,23 @@ void		free_all_room(t_room *first)
 
 void		free_room_if(t_room *open, t_room *closed)
 {
-	t_room		*actO;
-	t_room		*actC;
+	t_room		*act_o;
+	t_room		*act_c;
 	t_room		*tmp;
 
-	actC = closed;
-	while (actC)
+	act_c = closed;
+	while (act_c)
 	{
-		actO = open;
-		tmp = actC->next;
-		while (actO)
+		act_o = open;
+		tmp = act_c->next;
+		while (act_o)
 		{
-			if (!ft_strcmp(actO->name, actC->name))
-				break;
-			else if (!actO->parent)
-				free_room(actC);
-			actO = actO->parent;
+			if (!ft_strcmp(act_o->name, act_c->name))
+				break ;
+			else if (!act_o->parent)
+				free_room(act_c);
+			act_o = act_o->parent;
 		}
-		actC = tmp;
+		act_c = tmp;
 	}
 }
