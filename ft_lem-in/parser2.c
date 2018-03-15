@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:58:24 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/15 15:20:02 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/15 16:24:41 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ t_room		*search_arrival(t_room *first, char *str)
 	return (ret);
 }
 
+int			free_if_needed(char *str)
+{
+	if (str)
+		ft_strdel(&str);
+	return (0);
+}
+
 int			start_link(t_room *first, char *str)
 {
 	t_room	*act;
@@ -49,7 +56,7 @@ int			start_link(t_room *first, char *str)
 	t_room	*out;
 
 	if (!first)
-		return (0);
+		return (free_if_needed(str));
 	act = first;
 	link = 0;
 	while (act)
