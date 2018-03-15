@@ -6,14 +6,14 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/13 16:29:08 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/15 12:46:55 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_H
 # define LEM_H
 
-#include <stdbool.h>
+# include <stdbool.h>
 
 typedef struct	s_position
 {

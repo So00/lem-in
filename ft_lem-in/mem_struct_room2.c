@@ -47,46 +47,50 @@ void	free_room_used(t_room *anthill, t_room *way)
 
 	actw = way;
 	if (way->start && way->next->end)
-	{
-		actw = way;
 		while (actw)
 		{
 			act = anthill;
 			while (ft_strcmp(act->name, actw->name))
 				act = act->next;
 			actL = act->link;
+			old = actL;
 			while (!actL->room->end && !actL->room->start)
 			{
 				old = actL;
 				actL = actL->next;
 			}
 			old->next = actL->next;
-			free(actL);
+			if (actL == act->link && !actL->next)
+			{
+				free(actL);
+				act->link = NULL;
+			}
+			else
+				free(actL);
 			actw = actw->next;
 		}
-	}
 	else
-	while (actw)
-	{
-		act = anthill;
-		while (act)
+		while (actw)
 		{
-			if (!ft_strcmp(act->name, actw->name))
+			act = anthill;
+			while (act)
 			{
-				save = anthill;
-				if (act != anthill)
-					while (save->next != act)
-						save = save->next;
-				if (!act->end && !act->start)
+				if (!ft_strcmp(act->name, actw->name))
 				{
-					free_link_used(anthill, actw->name);
-					save->next = act->next;
-					free_room(act);
-					act = save;
+					save = anthill;
+					if (act != anthill)
+						while (save->next != act)
+							save = save->next;
+					if (!act->end && !act->start)
+					{
+						free_link_used(anthill, actw->name);
+						save->next = act->next;
+						free_room(act);
+						act = save;
+					}
 				}
+				act = act->next;
 			}
-			act = act->next;
-		}
-		actw = actw->next;
+			actw = actw->next;
 	}
 }
