@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 11:30:29 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/15 13:41:09 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:41:02 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,13 @@ t_room			*ft_get_anthill(void)
 	nb = 0;
 	ant_nb = 0;
 	act = NULL;
+	first = NULL;
 	while (!ant_nb && get_next_line(0, &tmp))
 		ant_nb = get_ant_nb(&tmp);
 	while (get_next_line(0, &tmp))
 		act = realloc_ar(&tmp, act, ++nb);
-	first = parse(act, 0, ant_nb);
+	if (act)
+		first = parse(act, 0, ant_nb);
 	ft_free_ar((void**)act);
 	return (first);
 }
