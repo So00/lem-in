@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:17:37 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/19 11:19:58 by atourner         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:37:12 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	error_gestion(FILE *fd, FILE *ftmp, char *str, char *av)
 	ft_printf("\033[0;31m🀫\033[0;0m");
 	fprintf(fd, "test %s\n wrong\n", av);
 	fprintf(fd, "Needed answer : [Error]\nFound answer : [%s]\n", str);
-	free(str);
 	if (!(str = ft_strnew(100)))
 		return ;
 	fgets(str, 100, ftmp);

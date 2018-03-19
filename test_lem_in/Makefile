@@ -6,7 +6,7 @@
 #    By: atourner <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/07 10:28:24 by atourner          #+#    #+#              #
-#    Updated: 2018/03/19 17:03:53 by atourner         ###   ########.fr        #
+#    Updated: 2018/03/19 18:38:01 by atourner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,5 +48,5 @@ normal_test:
 	@sh scripts/normal.sh
 
 clean:
-	@rm -rf leaks error lem-in normal normal.txt error.txt ant validity validity.txt
+	@rm -rf leaks error lem-in normal normal.txt error.txt ant validity validity.txt ../lem-in.dSYM/
 	@make fclean -C ../
