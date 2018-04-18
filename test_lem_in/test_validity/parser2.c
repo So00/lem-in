@@ -6,39 +6,32 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:58:24 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/15 16:24:41 by atourner         ###   ########.fr       */
+/*   Updated: 2018/04/17 15:08:41 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "lem.h"
 
-t_room		*search_arrival(t_room *first, char *str)
+t_room		*search_arrival(t_room *first, char *str, char *to_free)
 {
 	t_room	*act;
-	char	*tmp;
 	t_room	*ret;
 
 	if (!first || !str)
 	{
-		if (str)
-			ft_strdel(&str);
+		ft_strdel(&to_free);
 		return (0);
 	}
 	act = first;
 	ret = NULL;
 	while (act && !ret)
 	{
-		if (ft_strstr(str, act->name))
-		{
-			if (!(tmp = ft_delete_part(str, act->name)))
-				ret = act;
-			else
-				ft_strdel(&tmp);
-		}
+		if (!(ft_strcmp(str, act->name)))
+			ret = act;
 		act = act->next;
 	}
-	ft_strdel(&str);
+	ft_strdel(&to_free);
 	return (ret);
 }
 
@@ -54,6 +47,7 @@ int			start_link(t_room *first, char *str)
 	t_room	*act;
 	int		link;
 	t_room	*out;
+	char	*tmp;
 
 	if (!first)
 		return (free_if_needed(str));
@@ -63,8 +57,9 @@ int			start_link(t_room *first, char *str)
 	{
 		if (ft_strstr(str, act->name))
 		{
+			tmp = ft_strdup(str);
 			if ((out = search_arrival(act->next,
-							ft_delete_part(str, act->name))))
+							ft_delete_part(tmp, act->name), tmp)))
 			{
 				create_link(act, out);
 				link++;
@@ -82,24 +77,23 @@ char		*ft_delete_part(char *to_delete, char *search)
 	int			i;
 
 	i = 0;
-	tmp = ft_strstr(to_delete, search);
+	tmp = best_chance(to_delete, search);
 	if (tmp == to_delete)
 	{
 		if (!ft_strcmp(to_delete, search))
 			return (NULL);
-		else
-		{
-			while (to_delete[i] == search[i])
-				i++;
-			tmp = ft_strdup(&(to_delete[i + 1]));
-		}
+		while (to_delete[i] == search[i])
+			i++;
+		tmp = (to_delete[i] == '-' ? &to_delete[i + 1] : &to_delete[i]);
 	}
 	else
 	{
+		if (ft_strcmp(tmp, search))
+			return (NULL);
 		while (&to_delete[i + 1] != tmp)
 			i++;
-		tmp = ft_strndup(to_delete,
-				(ft_strcmp(&to_delete[i + 1], search) ? i + 1 : i));
+		to_delete[(to_delete[i] == '-' ? i : i + 1)] = '\0';
+		tmp = to_delete;
 	}
 	return (tmp);
 }

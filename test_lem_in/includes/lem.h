@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/19 16:04:41 by atourner         ###   ########.fr       */
+/*   Updated: 2018/04/17 15:13:25 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int				no_way_to_end(t_room *first);
 int				possible_move(t_room *anthill, char *move);
 int				check_double(int ant_this_turn[1000], int i);
 void			error_gestion(char *map_name);
+char			*best_chance(char *to_delete, char *search);
 
 #endif

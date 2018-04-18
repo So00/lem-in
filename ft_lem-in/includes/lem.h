@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:50:45 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/15 12:46:55 by atourner         ###   ########.fr       */
+/*   Updated: 2018/04/17 15:05:12 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void			free_all_room(t_room *first);
 void			free_room(t_room *act);
 void			free_room_if(t_room *open, t_room *closed);
 char			*ft_delete_part(char *to_delete, char *search);
+char			*best_chance(char *to_delete, char *search);
 int				start_link(t_room *first, char *str);
 int				valid_room(char *tmp);
 int				get_ant_nb(char **to_get);

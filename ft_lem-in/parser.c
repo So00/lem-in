@@ -6,7 +6,7 @@
 /*   By: atourner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 11:24:36 by atourner          #+#    #+#             */
-/*   Updated: 2018/03/15 14:57:08 by atourner         ###   ########.fr       */
+/*   Updated: 2018/04/17 15:08:45 by atourner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,28 @@ int		get_ant_nb(char **to_get)
 		ret = ft_atoi(*to_get);
 	ft_strdel(to_get);
 	return (ret);
+}
+
+char	*best_chance(char *to_delete, char *search)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	tmp = ft_strstr(to_delete, search);
+	while (to_delete[i] == search[i] && to_delete[i])
+		i++;
+	if ((to_delete[i] == '-' && i != 0) || to_delete[i] == '\0')
+		return (tmp);
+	i = (int)ft_strlen(to_delete);
+	j = (int)ft_strlen(search);
+	while (to_delete[i] == search[j] && j > 0)
+	{
+		i--;
+		j--;
+	}
+	return (&to_delete[i]);
 }
 
 void	get_command(char *str, int *command)

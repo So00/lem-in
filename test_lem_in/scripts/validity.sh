@@ -5,7 +5,10 @@
 	for file in $list_file
 	do
 		rm -rf ant
-		../lem-in < $file > ant;
+		sed -e '1,2d' $file > act
+		../lem-in < act > ant;
 		./validity $file < $file
 	done
+	rm -rf act
+	rm -rf ant
 	echo "\nThanks for using that script, good luck ;)"
